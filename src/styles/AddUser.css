@@ -1,0 +1,183 @@
+.hidden{
+  display: none;
+}
+
+.addUserContainer{
+  display: flex;
+  flex-direction: column;
+  padding:3rem 7rem;
+  align-items: center;
+}
+
+.addUserInst  {
+  font-size: x-large;
+  font-weight: 600;
+}
+
+
+.addUserMain {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  padding: 20px;
+  margin: 40px auto;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.addUserLeft {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.addUserInput {
+  display: flex;
+  flex-direction: column;
+}
+
+.addUserInput label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.addUserInput input {
+  padding: 10px;
+  border: 2px solid #d1d1d1;
+  border-radius: 8px;
+  outline: none;
+  transition: border 0.3s ease;
+}
+
+.addUserInput input:focus {
+  border-color: #4a90e2;
+  box-shadow: 0 0 5px rgba(74, 144, 226, 0.3);
+}
+
+.addUserRight {
+  width: 35%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.addUserRight img {
+  max-width: 90%;
+  border-radius: 8px;
+}
+
+.startCapture{
+  background-color: #253B66;
+    color: #ffffff;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 25px;
+    cursor: pointer;
+    font-weight: bold;
+    width: 50%;
+    text-align: center;
+    transition: background 0.3s ease;
+}
+
+.captureArea {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f0f8ff; /* Light blue for visual comfort */
+  border: 2px solid #0078ff;
+  border-radius: 12px;
+  padding: 20px;
+  margin-top: 20px;
+  box-shadow: 0 4px 10px rgba(0, 120, 255, 0.2);
+  animation: pulse 1.5s infinite alternate;
+}
+
+.captureArea video {
+  width: 100%;
+  max-width: 400px;
+  border: 3px solid #0078ff;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
+.stopCapture {
+  margin-left: 2cm;
+  background-color: #ff4c4c;
+  color: #fff;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+
+.stopCapture:hover {
+  background-color: #e03a3a;
+}
+
+.submitButton{
+  padding: 8px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: #436ab9;
+  color: white;
+}
+
+.submitButton:hover {
+  background-color: #253B66
+}
+.resultant-area {
+  background-color: #e6f7e6;
+  border: 2px solid #4CAF50;
+  border-radius: 12px;
+  padding: 20px;
+  margin-top: 20px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(76, 175, 80, 0.2);
+}
+
+.afterCaptureinfo {
+  font-size: 1.1rem;
+  color: #4CAF50;
+  margin-bottom: 12px;
+}
+
+#user-name {
+  font-weight: bold;
+  color: #2d8659;
+}
+
+@keyframes pulse {
+  from {
+      box-shadow: 0 4px 12px rgba(0, 120, 255, 0.3);
+  }
+  to {
+      box-shadow: 0 4px 20px rgba(0, 120, 255, 0.5);
+  }
+}
+
+
+.notification {
+  background-color: #007bff;
+  color: #fff;
+  text-align: center;
+  padding: 10px;
+  border-radius: 8px;
+  margin-top: 10px;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
