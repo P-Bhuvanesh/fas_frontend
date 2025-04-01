@@ -144,7 +144,7 @@ const Home = () => {
               onClick={() => {
                 setIsLogging(true);
                 setCurrentAction('check-in');
-                setErrorMessage(""); // Clear previous errors
+                setErrorMessage("");
                 startCamera();
                 setTimeout(() => captureAndProcessImage('check-in'), 2000);
               }}
@@ -157,7 +157,7 @@ const Home = () => {
               onClick={() => {
                 setIsLogging(true);
                 setCurrentAction('check-out');
-                setErrorMessage(""); // Clear previous errors
+                setErrorMessage(""); 
                 startCamera();
                 setTimeout(() => captureAndProcessImage('check-out'), 2000);
               }}
