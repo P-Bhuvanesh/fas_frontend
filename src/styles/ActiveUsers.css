@@ -1,106 +1,127 @@
 .activeUsersContainer {
-    max-width: 1000px;
+    max-width: 1300px;
     margin: 40px auto;
     padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    transition: 0.3s ease-in-out;
 }
 
 .activeUsersHeader {
     text-align: center;
-    font-size: 24px;
+    font-size: 26px;
     font-weight: bold;
     margin-bottom: 20px;
-    color: #333;
+    color: #2c3e50;
 }
 
 .filterSection {
     display: flex;
-    gap: 15px;
+    gap: 10px;
     align-items: center;
-    margin-bottom: 20px;
+    justify-content: center;
+    margin-bottom: 40px;
     flex-wrap: wrap;
 }
 
 .filterSection label {
     font-weight: bold;
-    margin-right: 5px;
+    font-size: larger;
+    color: #304265;
 }
 
 .filterSection input {
-    padding: 8px 12px;
+    padding: 10px 20px;
     border: 1px solid #ccc;
-    border-radius: 6px;
-    flex: 1;
-    min-width: 120px;
+    border-radius: 8px;
+    font-size: medium;
+    transition: all 0.3s ease;
 }
 
+.filterSection input:focus {
+    border-color: #304265;
+    outline: none;
+    box-shadow: 0 0 8px rgba(48, 66, 101, 0.3);
+}
+
+/* User List Grid */
 .usersList {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 20px;
+    justify-content: center;
 }
 
+/* User Card */
 .activeUserCard {
-    background-color: #ffffff;
+    background: linear-gradient(145deg, #f8f8f8, #e6e6e6);
     border: 2px solid #304265;
-    border-radius: 12px;
-    overflow: hidden;
-    text-align: center;
-    padding: 15px;
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease-in-out;
+    border-radius: 14px;
+    padding: 18px;
+    text-align: left;
+    box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    cursor: pointer;
 }
 
 .activeUserCard:hover {
     transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(48, 66, 101, 0.2);
 }
 
+/* User Image */
 .activeUserImage {
-    width: 100px;
-    height: 100px;
+    width: 90px;
+    height: 90px;
     border-radius: 50%;
-    object-fit: fill;
-    margin: 0 auto 10px;
+    object-fit: cover;
+    margin-bottom: 10px;
     border: 3px solid #304265;
-    display: block;
+    transition: 0.3s ease-in-out;
 }
 
+/* Placeholder for No Image */
 .noImagePlaceholder {
-    width: 100px;
-    height: 100px;
-    /* border-radius: 50%; */
+    width: 90px;
+    height: 90px;
     background-color: #f0f0f0;
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 0 auto 10px;
+    border-radius: 50%;
     border: 3px solid #4CAF50;
     font-size: 12px;
     color: #777;
+    transition: 0.3s ease-in-out;
 }
 
+/* User Info */
 .activeUserInfo {
-    font-size: 16px;
+    font-size: 15px;
     color: #555;
-    margin-bottom: 5px;
+    font-weight: 500;
+    text-align: left;
+    margin-bottom: 6px;
 }
 
+/* No Users Message */
 .noUsersMessage {
     text-align: center;
-    font-size: 20px;
+    font-size: 18px;
+    font-weight: bold;
     color: #777;
     padding: 40px 0;
     grid-column: span 3;
 }
 
-
+/* Responsive Media Queries */
 @media (max-width: 768px) {
     .usersList {
         grid-template-columns: repeat(2, 1fr);
     }
-    
+
     .noUsersMessage {
         grid-column: span 2;
     }
@@ -110,17 +131,31 @@
     .usersList {
         grid-template-columns: 1fr;
     }
-    
+
     .noUsersMessage {
         grid-column: span 1;
     }
-    
+
     .filterSection {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: stretch;
     }
-    
+
     .filterSection input {
         width: 100%;
+        font-size: 16px;
+    }
+
+    .activeUserCard {
+        padding: 15px;
+    }
+
+    .activeUserImage {
+        width: 80px;
+        height: 80px;
+    }
+
+    .activeUserInfo {
+        font-size: 14px;
     }
 }

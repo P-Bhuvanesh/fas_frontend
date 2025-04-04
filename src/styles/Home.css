@@ -1,152 +1,381 @@
 .homeContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    margin-top: 30px;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-top: 30px;
+}
 
-  .homeTop {
-    font-size: 2rem;
-    font-weight: bold;
-    color: #2c3e50;
-  }
+.loading-overlay-home {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.695); /* Semi-transparent background */
+  backdrop-filter: blur(5px);
+  display: flex;
+  flex-direction: column; /* Stack items vertically */
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
 
-  .homeDescription {
-    font-size: 1.2rem;
-    color: #555;
-    padding: 20px;
-  }
+.loading-overlay-home img {
+  width: 300px; /* Adjust the size */
+  height: auto;
+  /* margin-bottom: 10px;  */
+  /* Space between GIF and text */
+}
 
-  .homeDown {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 50px;
-    flex-wrap: wrap;
-    width: 80%;
-  }
-  
-  /* Left Section */
-  .homeLeft {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 70%;
-  }
-  
-  .feedContainer {
-    position: relative;
-    width: 100%;
-    height: 28rem;
-    border: 2px solid #ddd;
-    border-radius: 10px;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  /* Initially visible image */
-  .homeImage {
-    width: 100%;
-    height: 100%;
-    border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  }
+.loading-overlay-home p {
+  color: white;
+  font-size: 1.4rem;
+  font-weight: 300;
+}
 
-  .videoFeed {
-    width: 100%;
-    height: 100%;
-    /* object-fit: cover; */
-    display: none;
-  }
-  
-  .videoFeed.visible {
-    display: block;
-  }
-  
-  .hidden {
-    display: none;
-  }
+.homeTop {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #2c3e50;
+  margin-bottom: 30px;
+}
 
-  .homeRight {
-    width: 19%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .actionButtons {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-  }
-  
-  /* Buttons */
-  .actionButtons button {
-    width: 200px;
-    padding: 12px;
-    font-size: 1rem;
-    font-weight: bold;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-  
-  /* Button Colors */
-  .startButton {
-    background-color: #1e5631;
-    color: white;
-  }
-  
-  .stopButton {
-    background-color: #d72638;
-    color: white;
-  }
-  
-  .addUserButton {
-    background-color: #2360e8;
-    color: white;
-  }
-  
-  /* Hover Effects */
-  .actionButtons button:hover {
-    opacity: 0.8;
-  }
-  
-  /* Attendance Logs */
-  .result {
-    margin-top: 40px;
-    padding: 20px;
-    width: 70%;
-    max-width: 600px;
-    background: #f8f9fa;
-    border-radius: 10px;
-    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .result h2 {
-    font-size: 1.5rem;
-    color: #2c3e50;
-    margin-bottom: 10px;
-  }
-  
-  .result ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .result li {
-    font-size: 1rem;
-    padding: 5px 0;
-    color: #555;
-  }
+.homeDown {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+  flex-wrap: wrap;
+  width: 80%;
+}
 
-  /* Styling for Processing Message */
+/* Left Section */
+.homeLeft {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 70%;
+}
+
+.feedContainer {
+  position: relative;
+  width: 100%;
+  height: 28rem;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Initially visible image */
+.homeImage {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.videoFeed {
+  width: 100%;
+  height: 100%;
+  /* object-fit: cover; */
+  display: none;
+}
+
+.videoFeed.visible {
+  display: block;
+}
+
+.hidden {
+  display: none;
+}
+
+.homeRight {
+  width: 19%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.actionButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Buttons */
+/* Import font for buttons */
+
+/* Button base styling */
+.actionButtons button {
+  position: relative;
+  width: 100%;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: white;
+  overflow: hidden;
+  z-index: 1;
+  transition: all 0.3s ease;
+}
+
+/* Button hover effects */
+.actionButtons button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.actionButtons button:active {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.actionButtons button:focus {
+  outline: none;
+}
+
+/* Button disabled state */
+.actionButtons button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Start button styling with gradient */
+.startButton {
+  background: linear-gradient(135deg, #1e7b3a 0%, #0d4d22 100%);
+  box-shadow: 0 4px 15px rgba(30, 123, 58, 0.4);
+}
+
+.startButton::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #25a44b 0%, #158534 100%);
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.3s ease;
+}
+
+.startButton:hover::before {
+  opacity: 1;
+}
+
+/* Stop button styling with gradient */
+.stopButton {
+  background: linear-gradient(135deg, #d72638 0%, #a01324 100%);
+  box-shadow: 0 4px 15px rgba(215, 38, 56, 0.4);
+}
+
+.stopButton::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #f13c50 0%, #c0182c 100%);
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.3s ease;
+}
+
+.stopButton:hover::before {
+  opacity: 1;
+}
+
+/* Add user button styling with gradient */
+.addUserButton {
+  background: linear-gradient(135deg, #2360e8 0%, #1644a1 100%);
+  box-shadow: 0 4px 15px rgba(35, 96, 232, 0.4);
+}
+
+.addUserButton::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #4077f4 0%, #1a55d3 100%);
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.3s ease;
+}
+
+.addUserButton:hover::before {
+  opacity: 1;
+}
+
+/* Shine effect */
+.actionButtons button::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -100%;
+  width: 70%;
+  height: 200%;
+  background: rgba(255, 255, 255, 0.1);
+  transform: rotate(25deg);
+  transition: all 0.55s ease-in-out;
+}
+
+.actionButtons button:hover::after {
+  left: 120%;
+}
+
+/* Button bubbles animation (optional) */
+.startButton::before,
+.stopButton::before,
+.addUserButton::before {
+  content: "";
+  pointer-events: none;
+  opacity: 0.1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 300%;
+  background-repeat: no-repeat;
+  background-position: 0 0, 0 0, 0 0;
+  background-image: radial-gradient(
+      circle at 20% 35%,
+      white 0,
+      white 2px,
+      transparent 3px
+    ),
+    radial-gradient(circle at 75% 44%, white 0, white 2px, transparent 3px),
+    radial-gradient(circle at 46% 52%, white 0, white 4px, transparent 5px);
+  animation: bubbles 8s linear infinite both;
+  z-index: -1;
+}
+
+@keyframes bubbles {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-66.666%);
+  }
+}
+
+/* Button text animation */
+.actionButtons button span {
+  display: block;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.actionButtons button:hover span {
+  animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-2px);
+  }
+  40% {
+    transform: translateX(2px);
+  }
+  60% {
+    transform: translateX(-2px);
+  }
+  80% {
+    transform: translateX(2px);
+  }
+}
+
+/* Loading state animation */
+.actionButtons button.loading {
+  position: relative;
+  color: transparent;
+}
+
+.actionButtons button.loading::before {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: calc(50% - 10px);
+  left: calc(50% - 10px);
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Media query for responsive design */
+@media (max-width: 768px) {
+.actionButtons button {
+    font-size: 0.9rem;
+    padding: 12px 16px;
+  }
+}
+
+.loading-overlay-home img{
+  width: 160px;
+}
+
+.loading-overlay-home p{
+  font-size: 1rem;
+  font-weight:200;
+}
+
+/* Attendance Logs */
+.result {
+  margin-top: 40px;
+  padding: 20px;
+  width: 70%;
+  max-width: 600px;
+  background: #f8f9fa;
+  border-radius: 10px;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.result h2 {
+  font-size: 1.5rem;
+  color: #2c3e50;
+  margin-bottom: 10px;
+}
+
+.result ul {
+  list-style: none;
+  padding: 0;
+}
+
+.result li {
+  font-size: 1rem;
+  padding: 5px 0;
+  color: #555;
+}
+
+/* Styling for Processing Message */
 p {
   font-size: 16px;
   font-weight: bold;
@@ -182,43 +411,53 @@ p {
   }
 }
 
-  
-  /* Responsive Design */
-  @media (max-width: 768px) {
-
-    .homeDown {
-      flex-direction: column;
-      gap: 30px;
-    }
-
-    .homeDescription{
-        margin-top: 1vh;
-        width: 300px;
-        display: flex;
-    }
-
-    .feedContainer{
-        width: max-content;
-        height: max-content;
-    }
-
-    .videoFeed{
-        object-fit: contain;
-        width: 100%;
-        height: 100%;
-    }
-  
-    .homeImage {
-      width: 100%;
-      height: 100%;
-    }
-  
-    .actionButtons button {
-      width: 180px;
-    }
-  
-    .result {
-      width: 90%;
-    }
+@media (max-width: 767px) {
+  .homeTop {
+    font-size: 1.1rem;
+    padding: 0 1rem;
   }
-  
+
+  .homeDown {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .homeLeft {
+    width: 100%;
+    min-width: unset;
+  }
+
+  .feedContainer {
+    max-height: 300px;
+  }
+
+  .homeRight {
+    width: 100%;
+    min-width: unset;
+  }
+
+  .actionButtons {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1px;
+  }
+
+  .actionButtons button {
+    flex: 1 1 calc(50% - 0.75rem);
+    min-width: 150px;
+    font-size: 0.7rem;
+    padding: 12px 10px;
+    gap: 1px;
+  }
+
+  .result {
+    width: 100%;
+    padding: 1.25rem;
+  }
+
+  .result h2 {
+    font-size: 1.2rem;
+  }
+}

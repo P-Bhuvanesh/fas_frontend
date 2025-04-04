@@ -14,7 +14,7 @@ const About = () => {
         <div className="aboutCard">
           <h2>Step 1: User Registration</h2>
           <p>
-            Employees can register themselves by clicking the **"Add New User"** button. They must enter their name and department 
+            Employees can register themselves by clicking the <strong>"Add New User"</strong> button. They must enter their name and department 
             and have their photo captured. This data is securely stored for future recognition.
           </p>
         </div>
@@ -22,7 +22,7 @@ const About = () => {
         <div className="aboutCard">
           <h2>Step 2: Starting Attendance</h2>
           <p>
-            To log attendance, click the **"Start"** button. The system will activate the camera and automatically detect and recognize faces.
+            To log attendance, click the <strong>"Start"</strong> button. The system will activate the camera and automatically detect and recognize faces.
             Each identified face will be logged with entry/exit times.
           </p>
         </div>
@@ -62,10 +62,10 @@ const About = () => {
       <div className="aboutFooter">
         <h2>Key Features:</h2>
         <ul>
-          <li>✅ Accurate and fast facial recognition.</li>
-          <li>✅ Secure data storage with organized image management.</li>
-          <li>✅ Easy-to-use interface with clear success/error messages.</li>
-          <li>✅ Responsive design for desktops, tablets, and mobile devices.</li>
+          <li>Accurate and fast facial recognition.</li>
+          <li>Secure data storage with organized image management.</li>
+          <li>Easy-to-use interface with clear success/error messages.</li>
+          <li>Responsive design for desktops, tablets, and mobile devices.</li>
         </ul>
         <p>
           Experience an effortless and efficient way to manage employee attendance with our cutting-edge facial recognition system!

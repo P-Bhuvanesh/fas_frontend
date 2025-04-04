@@ -33,23 +33,23 @@ const ActiveUsers = () => {
 
   return (
     <div className="activeUsersContainer">
-      <h2>Active Users ({users.length})</h2>
+      <h2 className="activeUsersHeader">Active Users ({users.length})</h2>
 
       <div className="filterSection">
-        <label>Department:</label>
+        <label>Department :</label>
         <input
           type="text"
           name="department"
-          placeholder="Enter department"
+          placeholder="Enter Department"
           value={filter.department}
           onChange={handleFilterChange}
         />
 
-        <label>Designation:</label>
+        <label>Designation :</label>
         <input
           type="text"
           name="designation"
-          placeholder="Enter designation"
+          placeholder="Enter Designation"
           value={filter.designation}
           onChange={handleFilterChange}
         />
@@ -60,7 +60,9 @@ const ActiveUsers = () => {
           users.map((user, index) => (
             <div key={index} className="activeUserCard">
               <img src={personIcon} alt="Person" className="activeUserImage" />
+              <p className="activeUserInfo">User ID: {user.user_id}</p>
               <p className="activeUserInfo">Name: {user.name}</p>
+              <p className="activeUserInfo">email: {user.email}</p>
               <p className="activeUserInfo">Dept: {user.department}</p>
               <p className="activeUserInfo">Designation: {user.designation}</p>
             </div>

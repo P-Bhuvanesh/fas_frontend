@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "../styles/Home.css";
 import homeImg from "../assets/home.png";
 import axios from "axios";
+import loadingGif from "../assets/load_1.gif";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -10,26 +11,27 @@ const Home = () => {
   const [attendanceLogs, setAttendanceLogs] = useState([]);
   const [currentAction, setCurrentAction] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
 
   // Check server connection on component mount
-  useEffect(() => {
-    const checkServerConnection = async () => {
-      try {
-        const response = await axios.get('http://localhost:8000/health');
-        if (response.data.status === 'healthy') {
-          setErrorMessage('');
-        } else {
-          setErrorMessage("Server is not fully operational.");
-        }
-      } catch (error) {
-        setErrorMessage("Unable to connect to the server. Please ensure the backend is running.");
-      }
-    };
-  
-    checkServerConnection();
-  }, []);
+  // useEffect(() => {
+  //   const checkServerConnection = async () => {
+  //     try {
+  //       const response = await axios.get('http://localhost:8000/health');
+  //       if (response.data.status === 'healthy') {
+  //         setErrorMessage('');
+  //       } else {
+  //         setErrorMessage("Server is not fully operational.");
+  //       }
+  //     } catch (error) {
+  //       setErrorMessage("Unable to connect to the server. Please ensure the backend is running.");
+  //     }
+  //   };
+
+  //   checkServerConnection();
+  // }, []);
 
   const startCamera = () => {
     if (navigator.mediaDevices.getUserMedia) {
@@ -57,39 +59,44 @@ const Home = () => {
   };
 
   const captureAndProcessImage = async (actionType) => {
+    setIsLoading(true);
     if (!videoRef.current) return;
 
     const canvas = canvasRef.current;
     const video = videoRef.current;
     canvas.width = video.videoWidth;
     canvas.height = video.videoHeight;
-    canvas.getContext('2d').drawImage(video, 0, 0);
+    canvas.getContext("2d").drawImage(video, 0, 0);
 
-    const base64Image = canvas.toDataURL('image/jpeg');
+    const base64Image = canvas.toDataURL("image/jpeg");
 
-    // Stop the camera after capturing the image
     stopCamera();
 
     try {
       let response;
-      if (actionType === 'check-in') {
-        response = await axios.post('http://localhost:8000/check-in', { image: base64Image });
+      if (actionType === "check-in") {
+        response = await axios.post("http://localhost:8000/check-in", {
+          image: base64Image,
+        });
       } else {
-        response = await axios.post('http://localhost:8000/check-out', { image: base64Image });
+        response = await axios.post("http://localhost:8000/check-out", {
+          image: base64Image,
+        });
       }
 
-      setAttendanceLogs(prev => [
-        ...prev, 
-        `${response.data.message} - ${new Date().toLocaleTimeString()}`
+      setAttendanceLogs((prev) => [
+        ...prev,
+        `${response.data.message} - ${new Date().toLocaleTimeString()}`,
       ]);
       setCurrentAction("");
       setErrorMessage("");
+      setIsLoading(false);
       setIsLogging(false);
     } catch (error) {
       // More specific error handling
       if (error.response) {
         const errorDetail = error.response.data.detail;
-        
+
         // Check for specific error scenarios
         if (errorDetail.includes("already checked in today")) {
           setErrorMessage("You have already checked in today.");
@@ -103,29 +110,37 @@ const Home = () => {
         }
       } else if (error.request) {
         // Network error or server not responding
-        setErrorMessage("Unable to connect to the server. Please check your connection.");
+        setErrorMessage(
+          "Unable to connect to the server. Please check your connection."
+        );
       } else {
         // Other errors
         setErrorMessage("An unexpected error occurred");
       }
-      
+
       setCurrentAction("");
       setIsLogging(false);
+      setIsLoading(false);
     }
   };
 
   return (
     <div className="homeContainer">
-      <h1 className="homeTop">Real-time Facial Attendance Application</h1>
-      <p className="homeDescription">
-        Automatically mark attendance using facial recognition technology.
-        Secure, efficient, and real-time tracking for workplaces and institutions.
-      </p>
-
+      {isLoading && (
+        <div className="loading-overlay-home">
+          <img src={loadingGif} alt="Loading..." />
+          <p>Processing ...</p>
+        </div>
+      )}
+      <h1 className="homeTop">
+        Clock-in/ -out by clicking the respective buttons below
+      </h1>
       <div className="homeDown">
         <div className="homeLeft">
           <div className="feedContainer">
-            {!isLogging && <img src={homeImg} alt="thumbnail" className="homeImage" />}
+            {!isLogging && (
+              <img src={homeImg} alt="thumbnail" className="homeImage" />
+            )}
             <video
               ref={videoRef}
               id="videoFeed"
@@ -133,40 +148,40 @@ const Home = () => {
               autoPlay
               playsInline
             ></video>
-            <canvas ref={canvasRef} style={{ display: 'none' }} />
+            <canvas ref={canvasRef} style={{ display: "none" }} />
           </div>
         </div>
 
         <div className="homeRight">
           <div className="actionButtons">
-            <button 
-              className="startButton" 
+            <button
+              className="startButton"
               onClick={() => {
                 setIsLogging(true);
-                setCurrentAction('check-in');
+                setCurrentAction("check-in");
                 setErrorMessage("");
                 startCamera();
-                setTimeout(() => captureAndProcessImage('check-in'), 2000);
+                setTimeout(() => captureAndProcessImage("check-in"), 2500);
               }}
               disabled={currentAction !== ""}
             >
               Check In
             </button>
-            <button 
-              className="stopButton" 
+            <button
+              className="stopButton"
               onClick={() => {
                 setIsLogging(true);
-                setCurrentAction('check-out');
-                setErrorMessage(""); 
+                setCurrentAction("check-out");
+                setErrorMessage("");
                 startCamera();
-                setTimeout(() => captureAndProcessImage('check-out'), 2000);
+                setTimeout(() => captureAndProcessImage("check-out"), 2500);
               }}
               disabled={currentAction !== ""}
             >
               Check Out
             </button>
-            <button 
-              className="addUserButton" 
+            <button
+              className="addUserButton"
               onClick={() => navigate("/adduser")}
             >
               Add New User

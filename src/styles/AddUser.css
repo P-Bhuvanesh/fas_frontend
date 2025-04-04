@@ -130,6 +130,36 @@
 .submitButton:hover {
   background-color: #253B66
 }
+
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.695); /* Semi-transparent background */
+  backdrop-filter: blur(5px);
+  display: flex;
+  flex-direction: column; /* Stack items vertically */
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.loading-overlay img {
+  width: 300px; /* Adjust the size */
+  height: auto;
+  /* margin-bottom: 10px;  */
+  /* Space between GIF and text */
+}
+
+.loading-overlay p {
+  color: white;
+  font-size: 1.4rem;
+  font-weight: 300;
+}
+
+
 .resultant-area {
   background-color: #e6f7e6;
   border: 2px solid #4CAF50;
@@ -179,5 +209,103 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .addUserContainer {
+    width: 90%;
+    margin: auto;
+    padding: 20px 8px;
+  }
+
+  .addUserInst{
+    font-size: 1.1rem;
+    font-weight: 300;
+  }
+
+  .addUserMain {
+    flex-direction:  column;
+    width: 100%;
+    align-items: center;
+    margin: 10px 0;
+    padding: 1px ;
+  }
+
+  .addUserLeft{
+    gap: 1px;
+  }
+
+  .addUserLeft, 
+  .addUserRight {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+
+  .addUserRight img {
+    width: 80%;
+    max-width: 250px;
+  }
+
+  .addUserInput {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 10px;
+  }
+
+  .loading-overlay img{
+    width: 220px;
+  }
+
+  .loading-overlay p{
+    font-size: 1rem;
+    font-weight:200;
+  }
+
+  .addUserInput label {
+    margin-bottom: 5px;
+    font-size: 16px;
+  }
+
+  .addUserInput input {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .startCapture, 
+  .stopCapture, 
+  .submitButton {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    margin-top: 10px;
+  }
+
+  .stopCapture{
+    margin-left: 0;
+  }
+
+  .captureArea {
+    width: 100%;
+    text-align: center;
+  }
+
+  .captureArea video {
+    width: 100%;
+    max-height: 250px;
+  }
+
+  .resultant-area {
+    text-align: center;
+    margin-top: 15px;
+  }
+
+  .afterCaptureinfo {
+    font-size: 14px;
   }
 }
