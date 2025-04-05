@@ -45,7 +45,7 @@ function App() {
             </ProtectedRoute>
           }
         />
-        <Route path="/admin" element={<Admin />} />
+        <Route path="/dashboard" element={<Admin />} />
         <Route path="/about" element={<About />} />
         <Route path="/adduser" element={<AddUser />} />
         <Route path="/activeuser" element={<ActiveUsers />} />

@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { FaBars, FaTimes, FaHome, FaUserPlus, FaUsers, FaCogs, FaInfoCircle } from "react-icons/fa";
+import { FaBars, FaTimes, FaHome, FaUserPlus,FaThLarge ,FaTachometerAlt,FaChartBar  , FaUsers, FaCogs, FaInfoCircle } from "react-icons/fa";
 import "../styles/Navbar.css";
 
 const Navbar = () => {
@@ -56,9 +56,9 @@ const Navbar = () => {
           </Link>
         </li>
         <li>
-          <Link to="/admin" onClick={() => setMenuOpen(false)}>
-            <FaCogs className="nav-icon" />
-            Admin
+          <Link to="/dashboard" onClick={() => setMenuOpen(false)}>
+            <FaChartBar   className="nav-icon" />
+            Dashboard
           </Link>
         </li>
         <li>

@@ -104,7 +104,7 @@
 }
 
 .stopCapture {
-  margin-left: 2cm;
+  /* margin-left: 2cm; */
   background-color: #ff4c4c;
   color: #fff;
   border: none;
@@ -112,6 +112,7 @@
   border-radius: 8px;
   cursor: pointer;
   transition: background 0.3s ease;
+  margin-left: 30%;
 }
 
 
@@ -125,6 +126,8 @@
   cursor: pointer;
   background-color: #436ab9;
   color: white;
+  margin-left: 48%;
+    transform: translateX(-50%);
 }
 
 .submitButton:hover {
@@ -166,8 +169,9 @@
   border-radius: 12px;
   padding: 20px;
   margin-top: 20px;
-  text-align: center;
   box-shadow: 0 4px 10px rgba(76, 175, 80, 0.2);
+  display: flex;
+  justify-self: center;
 }
 
 .afterCaptureinfo {
