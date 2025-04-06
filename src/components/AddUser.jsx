@@ -11,7 +11,7 @@ const AddUser = () => {
     designation: "",
     department: "",
   });
-  const [users, setUsers] = useState([]); // Store all users from MongoDB
+  const [users, setUsers] = useState([]); 
   const [isCapturing, setIsCapturing] = useState(false);
   const [images, setImages] = useState([]);
   const [notification, setNotification] = useState("");
@@ -21,10 +21,9 @@ const AddUser = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    // Fetch existing users from MongoDB when the component mounts
     const fetchUsers = async () => {
       try {
-        const response = await fetch("http://localhost:8000/get_users");
+        const response = await fetch("http://localhost:8000/get_users_check");
         const data = await response.json();
         if (response.ok) {
           setUsers(data.users); // Store users in state

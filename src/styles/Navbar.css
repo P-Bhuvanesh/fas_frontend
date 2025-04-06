@@ -12,7 +12,7 @@ body {
 
 
 .navContainer {
-  background-color: #304265;
+  background-color: #1e2a3a;
   color: #fff;
   display: flex;
   justify-content: space-between;
@@ -132,7 +132,7 @@ body {
   left: 0;
   width: 40%;
   height: 100%;
-  background-color: #304265f5;
+  background-color: #1e2a3a;
   text-align: left;
   padding: 0 20px;
   z-index: 1000;

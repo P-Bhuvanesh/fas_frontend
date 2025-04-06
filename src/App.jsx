@@ -7,8 +7,9 @@ import Admin from "./components/Admin";
 import About from "./components/About";
 import AddUser from "./components/AddUser";
 import ActiveUsers from "./components/ActiveUsers";
+import Footer from "./components/Footer";
 import { Routes, Route, Navigate } from 'react-router-dom';
-
+import InstallPWA from "./components/InstallApp";
 
 
 function ProtectedRoute({ children }) {
@@ -34,7 +35,6 @@ function App() {
   return (
     <>
       <Navbar />
-
       <Routes>
         <Route path="/" element={<Hero />} />
         <Route
@@ -51,7 +51,8 @@ function App() {
         <Route path="/activeuser" element={<ActiveUsers />} />
       </Routes>
 
-      {/* <Footer /> */}
+      <Footer />
+      <InstallPWA/>
     </>
   );
 }
