@@ -10,6 +10,8 @@ import ActiveUsers from "./components/ActiveUsers";
 import Footer from "./components/Footer";
 import { Routes, Route, Navigate } from 'react-router-dom';
 import InstallPWA from "./components/InstallApp";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 function ProtectedRoute({ children }) {
@@ -35,6 +37,7 @@ function App() {
   return (
     <>
       <Navbar />
+      <ToastContainer position="top-center" autoClose={3000} />
       <Routes>
         <Route path="/" element={<Hero />} />
         <Route

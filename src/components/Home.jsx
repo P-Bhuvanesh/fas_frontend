@@ -4,6 +4,8 @@ import "../styles/Home.css";
 import homeImg from "../assets/home.png";
 import axios from "axios";
 import loadingGif from "../assets/load_1.gif";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -14,24 +16,6 @@ const Home = () => {
   const [isLoading, setIsLoading] = useState(false);
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
-
-  // Check server connection on component mount
-  // useEffect(() => {
-  //   const checkServerConnection = async () => {
-  //     try {
-  //       const response = await axios.get('http://localhost:8000/health');
-  //       if (response.data.status === 'healthy') {
-  //         setErrorMessage('');
-  //       } else {
-  //         setErrorMessage("Server is not fully operational.");
-  //       }
-  //     } catch (error) {
-  //       setErrorMessage("Unable to connect to the server. Please ensure the backend is running.");
-  //     }
-  //   };
-
-  //   checkServerConnection();
-  // }, []);
 
   const startCamera = () => {
     if (navigator.mediaDevices.getUserMedia) {
@@ -44,6 +28,7 @@ const Home = () => {
         .catch((err) => {
           console.error("Error accessing webcam:", err);
           setErrorMessage("Could not access webcam. Please check permissions.");
+          toast.error("Could not access webcam. Please check permissions.");
         });
     }
   };
@@ -84,40 +69,43 @@ const Home = () => {
         });
       }
 
-      setAttendanceLogs((prev) => [
-        ...prev,
-        `${response.data.message} - ${new Date().toLocaleTimeString()}`,
-      ]);
+      const logMessage = `${response.data.message} - ${new Date().toLocaleTimeString()}`;
+      setAttendanceLogs((prev) => [logMessage, ...prev]); // Add new logs at the top
       setCurrentAction("");
       setErrorMessage("");
+      
+      // Show success toast notification
+      toast.success(response.data.message);
+      
       setIsLoading(false);
       setIsLogging(false);
+      
     } catch (error) {
       // More specific error handling
+      let errorMsg = "An unexpected error occurred";
+      
       if (error.response) {
         const errorDetail = error.response.data.detail;
 
         // Check for specific error scenarios
         if (errorDetail.includes("already checked in today")) {
-          setErrorMessage("You have already checked in today.");
+          errorMsg = "You have already checked in today.";
         } else if (errorDetail.includes("has not checked in today")) {
-          setErrorMessage("You must check in before checking out.");
+          errorMsg = "You must check in before checking out.";
         } else if (errorDetail.includes("User not recognized")) {
-          setErrorMessage("User not recognized. Please try again or add user.");
+          errorMsg = "User not recognized. Please try again or add user.";
         } else {
           // Generic error handling for other scenarios
-          setErrorMessage(errorDetail || "An unexpected error occurred");
+          errorMsg = errorDetail || "An unexpected error occurred";
         }
       } else if (error.request) {
         // Network error or server not responding
-        setErrorMessage(
-          "Unable to connect to the server. Please check your connection."
-        );
-      } else {
-        // Other errors
-        setErrorMessage("An unexpected error occurred");
+        errorMsg = "Unable to connect to the server. Please check your connection.";
       }
 
+      setErrorMessage(errorMsg);
+      toast.error(errorMsg);
+      
       setCurrentAction("");
       setIsLogging(false);
       setIsLoading(false);
@@ -126,15 +114,30 @@ const Home = () => {
 
   return (
     <div className="homeContainer">
+      {/* Toast Container - this is where all notifications will be rendered */}
+      <ToastContainer 
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
+      
       {isLoading && (
         <div className="loading-overlay-home">
           <img src={loadingGif} alt="Loading..." />
           <p>Processing ...</p>
         </div>
       )}
+      
       <h1 className="homeTop">
         Clock-in/ -out by clicking the respective buttons below
       </h1>
+      
       <div className="homeDown">
         <div className="homeLeft">
           <div className="feedContainer">
@@ -149,6 +152,16 @@ const Home = () => {
               playsInline
             ></video>
             <canvas ref={canvasRef} style={{ display: "none" }} />
+          </div>
+          
+          {/* Recent Activity Panel for Mobile */}
+          <div className="recent-activity-mobile">
+            <h3>Recent Activity</h3>
+            {attendanceLogs.length > 0 ? (
+              <p className="latest-log">{attendanceLogs[0]}</p>
+            ) : (
+              <p className="no-logs">No recent activity</p>
+            )}
           </div>
         </div>
 
@@ -188,13 +201,27 @@ const Home = () => {
             </button>
           </div>
 
-          {currentAction && <p>Processing {currentAction}...</p>}
-          {errorMessage && <p className="error">{errorMessage}</p>}
+          {currentAction && <p className="status-message">Processing {currentAction}...</p>}
+          
+          {/* Recent Logs Section (Visible on desktop) */}
+          <div className="recent-logs-desktop">
+            <h3>Recent Activity</h3>
+            <div className="logs-container">
+              {attendanceLogs.length > 0 ? (
+                attendanceLogs.slice(0, 3).map((log, index) => (
+                  <div key={index} className="log-item">{log}</div>
+                ))
+              ) : (
+                <p className="no-logs">No recent activity</p>
+              )}
+            </div>
+          </div>
         </div>
       </div>
 
+      {/* Full Attendance Log History (can be accessed by scrolling) */}
       <div className="result">
-        <h2>Attendance Logs</h2>
+        <h2>Attendance Log History</h2>
         <ul>
           {attendanceLogs.map((log, index) => (
             <li key={index}>{log}</li>

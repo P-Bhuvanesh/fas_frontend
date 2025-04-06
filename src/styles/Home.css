@@ -426,6 +426,8 @@ p {
   .homeLeft {
     width: 100%;
     min-width: unset;
+    display: flex;
+    flex-direction: column;
   }
 
   .feedContainer {
@@ -459,5 +461,75 @@ p {
 
   .result h2 {
     font-size: 1.2rem;
+  }
+}
+
+/* Add this to your Home.css file */
+
+/* Recent Activity Styling */
+.recent-logs-desktop {
+  margin-top: 20px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  padding: 12px;
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+.logs-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.log-item {
+  padding: 8px;
+  background-color: white;
+  border-radius: 4px;
+  border-left: 4px solid #2196f3;
+}
+
+.recent-activity-mobile {
+  display: none;
+  margin-top: 15px;
+  padding: 10px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+}
+
+.latest-log {
+  padding: 8px;
+  background-color: white;
+  border-radius: 4px;
+  border-left: 4px solid #2196f3;
+}
+
+.no-logs {
+  font-style: italic;
+  color: #757575;
+}
+
+.status-message {
+  margin-top: 10px;
+  font-weight: 500;
+  color: #2196f3;
+}
+
+/* Media queries for responsive design */
+@media (max-width: 768px) {
+  .recent-logs-desktop {
+    display: none;
+  }
+  
+  .recent-activity-mobile {
+    display: block;
+  }
+  
+  .homeDown {
+    flex-direction: column;
+  }
+  
+  .homeLeft, .homeRight {
+    width: 100%;
   }
 }
