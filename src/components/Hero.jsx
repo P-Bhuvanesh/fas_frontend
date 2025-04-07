@@ -5,6 +5,9 @@ import image from "../assets/crop.png";
 import loadingGif from "../assets/load_1.gif";
 
 const Hero = () => {
+
+  const apiUrl = import.meta.env.VITE_API_URL;
+  
   const [checks, setChecks] = useState({
     camera: false,
     database: false,
@@ -23,43 +26,57 @@ const Hero = () => {
 
   const checkStatus = () => {
     setIsLoading(true);
-
-    const fetchPromise = fetch("http://localhost:8000/status")
+  
+    let dbServerData = { database: false, server: false };
+    
+    const fetchPromise = fetch(`${apiUrl}/status`)
       .then((res) => res.json())
       .then((data) => {
-        setChecks(data);
-        setStatusError(!data.camera || !data.database || !data.server);
-        localStorage.setItem("systemChecks", JSON.stringify(data));
+        dbServerData = data;
       })
       .catch((err) => {
         console.error("Error fetching status:", err);
-        setStatusError(true);
       });
-    
-    let cameraPromise = Promise.resolve();
-    if (navigator.mediaDevices && navigator.mediaDevices.enumerateDevices) {
-      cameraPromise = navigator.mediaDevices
-        .enumerateDevices()
-        .then((devices) => {
-          const videoDevices = devices.filter(
-            (device) => device.kind === "videoinput"
-          );
-          setCameras(videoDevices);
-          localStorage.setItem("availableCameras", JSON.stringify(videoDevices));
-          
-          if (videoDevices.length > 0 && !selectedCamera) {
-            setSelectedCamera(videoDevices[0].deviceId);
-            localStorage.setItem("selectedCamera", videoDevices[0].deviceId);
-          }
-        })
-        .catch((err) => console.error("Error accessing media devices:", err));
-    }
-
+  
+    let cameraAvailable = false;
+  
+    const cameraPromise = navigator.mediaDevices
+      .enumerateDevices()
+      .then((devices) => {
+        const videoDevices = devices.filter(
+          (device) => device.kind === "videoinput"
+        );
+        setCameras(videoDevices);
+  
+        cameraAvailable = videoDevices.length > 0;
+  
+        if (videoDevices.length > 0 && !selectedCamera) {
+          setSelectedCamera(videoDevices[0].deviceId);
+          localStorage.setItem("selectedCamera", videoDevices[0].deviceId);
+        }
+  
+        localStorage.setItem("availableCameras", JSON.stringify(videoDevices));
+      })
+      .catch((err) => {
+        console.error("Error accessing media devices:", err);
+      });
+  
     Promise.all([fetchPromise, cameraPromise])
+      .then(() => {
+        const fullStatus = {
+          camera: cameraAvailable,
+          database: dbServerData.database,
+          server: dbServerData.server,
+        };
+        setChecks(fullStatus);
+        setStatusError(!fullStatus.camera || !fullStatus.database || !fullStatus.server);
+        localStorage.setItem("systemChecks", JSON.stringify(fullStatus));
+      })
       .finally(() => {
         setIsLoading(false);
       });
   };
+  
 
 
   useEffect(() => {

@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import "../styles/AddUser.css";
 import loadingGif from "../assets/load.gif";
 
+const apiUrl = import.meta.env.VITE_API_URL;
+
 const AddUser = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -23,7 +25,7 @@ const AddUser = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await fetch("http://localhost:8000/get_users_check");
+        const response = await fetch(`${apiUrl}/get_users_check`);
         const data = await response.json();
         if (response.ok) {
           setUsers(data.users); // Store users in state
@@ -103,7 +105,7 @@ const AddUser = () => {
   const handleSubmit = async () => {
     setIsLoading(true);
     try {
-      const response = await fetch("http://localhost:8000/add_user", {
+      const response = await fetch(`${apiUrl}/add_user`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ...formData, images }),

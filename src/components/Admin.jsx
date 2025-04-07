@@ -27,6 +27,9 @@ ChartJS.register(
 );
 
 const Admin = () => {
+
+
+  const apiUrl = import.meta.env.VITE_API_URL;
   const [users, setUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState("");
   const [attendanceData, setAttendanceData] = useState([]);
@@ -108,7 +111,7 @@ const Admin = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetch("http://localhost:8000/get_users")
+    fetch(`${apiUrl}/get_users`)
       .then((res) => res.json())
       .then((data) => {
         setUsers(Array.isArray(data) ? data : []);
@@ -124,7 +127,7 @@ const Admin = () => {
   useEffect(() => {
     if (selectedUser) {
       setLoading(true);
-      fetch(`http://localhost:8000/get-attendance/${selectedUser}`)
+      fetch(`${apiUrl}/get-attendance/${selectedUser}`)
         .then((res) => res.json())
         .then((data) => {
           const sortedData = data.sort(

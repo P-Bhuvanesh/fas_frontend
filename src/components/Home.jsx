@@ -7,6 +7,8 @@ import loadingGif from "../assets/load_1.gif";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+const apiUrl = import.meta.env.VITE_API_URL;
+
 const Home = () => {
   const navigate = useNavigate();
   const [isLogging, setIsLogging] = useState(false);
@@ -60,11 +62,11 @@ const Home = () => {
     try {
       let response;
       if (actionType === "check-in") {
-        response = await axios.post("http://localhost:8000/check-in", {
+        response = await axios.post(`${apiUrl}/check-in`, {
           image: base64Image,
         });
       } else {
-        response = await axios.post("http://localhost:8000/check-out", {
+        response = await axios.post(`${apiUrl}/check-out`, {
           image: base64Image,
         });
       }

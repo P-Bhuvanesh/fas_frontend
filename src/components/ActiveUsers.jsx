@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import "../styles/ActiveUsers.css";
 import personIcon from "../assets/person.png"; // Static person icon
 
+const apiUrl = import.meta.env.VITE_API_URL;
+
 const ActiveUsers = () => {
   const [users, setUsers] = useState([]);
   const [filter, setFilter] = useState({ department: "", designation: "" });
@@ -13,7 +15,7 @@ const ActiveUsers = () => {
         if (filter.department) params.append("department", filter.department);
         if (filter.designation) params.append("designation", filter.designation);
 
-        const response = await fetch(`http://localhost:8000/active_users?${params}`);
+        const response = await fetch(`${apiUrl}/active_users?${params}`);
         const data = await response.json();
 
         setUsers(data.active_users || []);
