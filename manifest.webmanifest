@@ -1,1 +1,23 @@
-{"name":"Trusten Vision","short_name":"Trusten","description":"A dotVision product","start_url":"/","display":"standalone","background_color":"#ffffff","theme_color":"#304265","lang":"en","scope":"/","icons":[{"src":"icons/icon-192x192.png","sizes":"192x192","type":"image/png"},{"src":"icons/icon-512x512.png","sizes":"512x512","type":"image/png"}]}
+{
+  "name": "Trusten Vision",
+  "short_name": "Trusten",
+  "description": "A dotVision product",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#304265",
+  "lang": "en",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
