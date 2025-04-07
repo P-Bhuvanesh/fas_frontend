@@ -114,7 +114,7 @@ const Footer = () => {
         <p className="footer-text">
           <FaCopyright /> Trusten.Vision &nbsp;||&nbsp; All rights reserved 2025
           &nbsp;||&nbsp; A dotVision product &nbsp;||&nbsp; Designed and
-          Developed by dotVision
+          Developed by dotVision devs
         </p>
       </div>
     </footer>
