@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FaBars, FaTimes, FaHome, FaUserPlus,FaThLarge ,FaTachometerAlt,FaChartBar  , FaUsers, FaCogs, FaInfoCircle } from "react-icons/fa";
 import "../styles/Navbar.css";
+import logo from "../assets/logo.png";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -31,7 +32,7 @@ const Navbar = () => {
       </div>
 
       <div className="nav-left">
-        <img src="./src/assets/logo.png" alt="Trusten Vision Logo" className="nav-logo" />
+        <img src={logo} alt="Trusten Vision Logo" className="nav-logo" />
         Trusten.Vision
       </div>
 
