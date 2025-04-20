@@ -90,11 +90,12 @@ const Home = () => {
         const errorDetail = error.response.data.detail;
 
         // Check for specific error scenarios
-        if (errorDetail.includes("already checked in today")) {
-          errorMsg = "You have already checked in today.";
-        } else if (errorDetail.includes("has not checked in today")) {
-          errorMsg = "You must check in before checking out.";
-        } else if (errorDetail.includes("User not recognized")) {
+        // if (errorDetail.includes("already checked in today")) {
+        //   errorMsg = "You have already checked in today.";
+        // } else if (errorDetail.includes("has not checked in today")) {
+        //   errorMsg = "You must check in before checking out.";
+        // } else 
+        if (errorDetail.includes("User not recognized")) {
           errorMsg = "User not recognized. Please try again or add user.";
         } else {
           // Generic error handling for other scenarios

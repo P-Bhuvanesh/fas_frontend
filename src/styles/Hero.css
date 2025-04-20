@@ -210,6 +210,14 @@
   .status-unavailable .status-value {
     background-color: rgba(245, 101, 101, 0.1);
   }
+
+  .distance-info p{
+    margin-top: 10px;
+    font-size: 1rem;
+    color: #d9534f; /* soft red */
+    text-align: center;
+  }
+  
   
   /* Camera Select */
   .camera-select {

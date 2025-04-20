@@ -26,7 +26,7 @@ ChartJS.register(
   BarElement
 );
 
-const Admin = () => {
+const Dashboard = () => {
 
 
   const apiUrl = import.meta.env.VITE_API_URL;
@@ -336,4 +336,4 @@ const Admin = () => {
   );
 };
 
-export default Admin;
+export default Dashboard;

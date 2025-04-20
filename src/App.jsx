@@ -3,7 +3,7 @@ import "./App.css";
 import Hero from "./components/Hero";
 import Navbar from "./components/Navbar";
 import Home from "./components/Home";
-import Admin from "./components/Admin";
+import Dashboard from "./components/Dashboard";
 import About from "./components/About";
 import AddUser from "./components/AddUser";
 import ActiveUsers from "./components/ActiveUsers";
@@ -48,7 +48,7 @@ function App() {
             </ProtectedRoute>
           }
         />
-        <Route path="/dashboard" element={<Admin />} />
+        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/about" element={<About />} />
         <Route path="/adduser" element={<AddUser />} />
         <Route path="/activeuser" element={<ActiveUsers />} />
