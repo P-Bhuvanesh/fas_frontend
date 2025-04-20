@@ -1,13 +1,24 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { FaBars, FaTimes, FaHome, FaUserPlus,FaThLarge ,FaTachometerAlt,FaChartBar  , FaUsers, FaCogs, FaInfoCircle } from "react-icons/fa";
+import {
+  FaBars,
+  FaTimes,
+  FaHome,
+  FaUserPlus,
+  FaThLarge,
+  FaTachometerAlt,
+  FaChartBar,
+  FaUsers,
+  FaUserCog,
+  FaCogs,
+  FaInfoCircle,
+} from "react-icons/fa";
 import "../styles/Navbar.css";
 import logo from "../assets/logo.png";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef(null);
-
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -37,17 +48,10 @@ const Navbar = () => {
       </div>
 
       <ul ref={menuRef} className={`nav-links ${menuOpen ? "active" : ""}`}>
-        
         <li>
           <Link to="/" onClick={() => setMenuOpen(false)}>
             <FaHome className="nav-icon" />
             Home
-          </Link>
-        </li>
-        <li>
-          <Link to="/adduser" onClick={() => setMenuOpen(false)}>
-            <FaUserPlus className="nav-icon" />
-            Add User
           </Link>
         </li>
         <li>
@@ -57,15 +61,15 @@ const Navbar = () => {
           </Link>
         </li>
         <li>
-          <Link to="/dashboard" onClick={() => setMenuOpen(false)}>
-            <FaChartBar   className="nav-icon" />
-            Dashboard
-          </Link>
-        </li>
-        <li>
           <Link to="/about" onClick={() => setMenuOpen(false)}>
             <FaInfoCircle className="nav-icon" />
             About
+          </Link>
+        </li>
+        <li>
+          <Link to="/admin/login" onClick={() => setMenuOpen(false)}>
+            <FaUserCog className="nav-icon" />
+            Admin
           </Link>
         </li>
       </ul>

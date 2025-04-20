@@ -323,18 +323,6 @@ const Hero = () => {
           >
             <span className="button-icon">▶</span> Go to Attendance
           </button>
-          <button
-            onClick={() => navigate("/adduser")}
-            disabled={
-              !checks.camera ||
-              !checks.database ||
-              !checks.server ||
-              !checks.geofence
-            }
-            className="secondary-button"
-          >
-            <span className="button-icon">+</span> Add User
-          </button>
         </div>
       </div>
 
