@@ -3,6 +3,9 @@ import { useNavigate } from "react-router-dom";
 import "../styles/AdminLogin.css";
 
 const AdminLogin = () => {
+
+  const apiUrl = import.meta.env.VITE_API_URL;
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -15,17 +18,16 @@ const AdminLogin = () => {
     setLoading(true);
     
     try {
-      const res = await fetch("http://localhost:8000/admin/login", {
+      const res = await fetch(`${apiUrl}/admin/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        credentials: "include", // For cookies if using cookie-based auth
+        credentials: "include",
         body: JSON.stringify({ username, password }),
       });
       
       const data = await res.json();
 
       if (res.ok && data.success) {
-        // Store auth token if provided
         if (data.token) {
           localStorage.setItem("adminToken", data.token);
         }

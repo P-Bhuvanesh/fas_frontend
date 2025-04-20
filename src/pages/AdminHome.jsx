@@ -3,6 +3,9 @@ import { useNavigate } from "react-router-dom";
 import "../styles/AdminHome.css";
 
 const AdminHome = () => {
+
+  const apiUrl = import.meta.env.VITE_API_URL;
+
   const navigate = useNavigate();
   const [adminName, setAdminName] = useState("TrustenDev");
   const [stats, setStats] = useState({
@@ -30,7 +33,7 @@ const AdminHome = () => {
 
   const checkBackendStatus = async () => {
     try {
-      const response = await fetch("http://localhost:8000/status");
+      const response = await fetch(`${apiUrl}/status`);
       const data = await response.json();
       setBackendStatus(data);
 
@@ -44,10 +47,10 @@ const AdminHome = () => {
 
   const loadDashboardData = async () => {
     try {
-      const usersResponse = await fetch("http://localhost:8000/get_users_check");
+      const usersResponse = await fetch(`${apiUrl}/get_users_check`);
       const usersData = await usersResponse.json();
 
-      const activeUsersResponse = await fetch("http://localhost:8000/active_users");
+      const activeUsersResponse = await fetch(`${apiUrl}/active_users`);
       const activeUsersData = await activeUsersResponse.json();
 
       const totalUsers = usersData.users?.length || 0;
